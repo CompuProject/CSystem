@@ -48,36 +48,45 @@
  * 
  */
 
-namespace lib\compuproject\mysql {
+namespace lib\compuproject\general {
 
     /**
-     * Класс для создания коннектора MySQL
+     * Description of Singleton
      *
      * @author Maxim Zaytsev
      * @copyright © 2010-2016, CompuProjec
-     * @package lib\compuproject\mysql
-     * @created 22.09.2015 18:25:05
+     * @package lib\compuproject\general
+     * @created 22.09.2015 18:27:08
      */
-    class MySQLConnector {
+    class Singleton {
 
-        private $connector;
+        private static $_instance = null;
 
         /**
-         * Создание конектора для базы данных.
-         * @param type $host - адрес сервера MySQL.
-         * @param type $user - логин пользователя MySQL.
-         * @param type $password - пароль для подключения к MySQL.
-         * @param type $datebase - навзание базы данных.
-         * @param type $charset - кодировка данных в базе. По умолчанию utf8.
+         * Реализация приватного конструктора класса.
+         * Предотвращает создание объекта в обход функции getInstance().
          */
-        public function __construct($host, $user, $password, $datebase, $charset = 'utf8') {
+        private function __construct() {
+            
+        }
 
-            $this->connector = new mysqli($host, $user, $password, $datebase);
-            $this->connector->set_charset($charset);
-            if ($this->connector->connect_errno) {
-                die('Ошибка соединения: ' . $this->connector->connect_errno);
-                exit();
+        /**
+         * Определение реализации функции клонирования объекта.
+         * Предотвращает клонирование объекта.
+         */
+        protected function __clone() {
+            
+        }
+
+        /**
+         * Возвращает единственный экземпляр объекта.
+         * @return Singleton object
+         */
+        public static function getInstance() {
+            if (is_null(self::$_instance)) {
+                self::$_instance = new self();
             }
+            return self::$_instance;
         }
 
     }

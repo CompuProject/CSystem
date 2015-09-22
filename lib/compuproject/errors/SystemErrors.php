@@ -48,38 +48,20 @@
  * 
  */
 
-namespace lib\compuproject\mysql {
+namespace lib\compuproject\errors {
+
+    use lib\compuproject\general\Singleton;
 
     /**
-     * Класс для создания коннектора MySQL
+     * Description of SystemErrors
      *
      * @author Maxim Zaytsev
      * @copyright © 2010-2016, CompuProjec
-     * @package lib\compuproject\mysql
-     * @created 22.09.2015 18:25:05
+     * @package lib\compuproject\errors
+     * @created 22.09.2015 18:28:20
      */
-    class MySQLConnector {
-
-        private $connector;
-
-        /**
-         * Создание конектора для базы данных.
-         * @param type $host - адрес сервера MySQL.
-         * @param type $user - логин пользователя MySQL.
-         * @param type $password - пароль для подключения к MySQL.
-         * @param type $datebase - навзание базы данных.
-         * @param type $charset - кодировка данных в базе. По умолчанию utf8.
-         */
-        public function __construct($host, $user, $password, $datebase, $charset = 'utf8') {
-
-            $this->connector = new mysqli($host, $user, $password, $datebase);
-            $this->connector->set_charset($charset);
-            if ($this->connector->connect_errno) {
-                die('Ошибка соединения: ' . $this->connector->connect_errno);
-                exit();
-            }
-        }
-
+    class SystemErrors extends Singleton {
+        //put your code here
     }
 
 }
